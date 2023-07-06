@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,
+    initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Async JS</title>
+</head>
+<body>
+<script>
+console.log('person1 shows ticket');
+console.log('person2 shows ticket');
+
+const preMovie = async () => {
+
+  const person3PromiseToShowTicketWhenWifeArrives = new Promise((resolve, reject) => {
+    setTimeout(() => resolve('ticket'), 3000);
+  });
+  const getPopcorn =  new Promise((resolve, reject) => resolve(`popcorn`));
+  
+  const addButter =  new Promise((resolve, reject) => resolve(`butter`));
+
+  const getColdDrinks =  new Promise((resolve, reject) => resolve(`ColdDrinks`));
+
+
+  let ticket = await person3PromiseToShowTicketWhenWifeArrives;
+let [popcorn,butter,ColdDrinks] = await Promise.all([getPopcorn,addButter,getColdDrinks]);
+  console.log(`${popcorn},${butter},${ColdDrinks}`);
+  return ticket;
+  
+};
+
+preMovie().then((t) => console.log(`person3: shows ${t}`));
+
+console.log('person4 shows ticket');
+console.log('person5 shows ticket');
+</script>
+</body>
+</html>
